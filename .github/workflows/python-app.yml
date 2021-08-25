@@ -28,6 +28,9 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
+    - name: Set git post buffer size
+      run: |
+        git config --global http.postBuffer 524288000
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
