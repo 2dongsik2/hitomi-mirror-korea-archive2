@@ -2,7 +2,7 @@ rm -rf segments
 mkdir -p segments
 #split -b 50m files.db splits/files.db.seg_
 #split -b 50m data.db splits/data.db.seg_
-rm segments/list
+#rm segments/list
 for f in compression/*.gz; do
     n=`basename ${f}`
     split -b 50m ${f} segments/${n}.segment_
