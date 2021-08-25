@@ -9,7 +9,7 @@ on:
       name:
         description: 'application path'
         required: true
-        default: 'silent.py'
+        default: 'run.py'
   schedule:
   - cron: '0 * * * *'
   #push:
@@ -37,7 +37,10 @@ jobs:
         ./merge.sh
     - name: Run application
       run: |
-        python ${{ github.event.inputs.logLevel || 'silent.py' }}
+        python ${{ github.event.inputs.logLevel || 'run.py' }}
+    - name: Compress files
+      run: |
+        ./compress.sh
     - name: Split files
       run: |
         ./split.sh
