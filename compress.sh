@@ -15,4 +15,4 @@ mkdir compression
 gzip -cnf data.json > compression/data.json.gz # k option
 gzip -cnf tags.json > compression/tags.json.gz
 gzip -cnf files.json > compression/files.json.gz
-#rm data.json tags.json files.json
+rm data.json tags.json files.json
