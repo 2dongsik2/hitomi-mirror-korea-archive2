@@ -35,9 +35,15 @@ jobs:
     - name: Merge files
       run: |
         ./merge.sh
+    - name: Import database
+      run: |
+        python import.py
     - name: Run application
       run: |
         python ${{ github.event.inputs.logLevel || 'run.py' }}
+    - name: Export database
+      run: |
+        python export.py
     - name: Compress files
       run: |
         ./compress.sh
