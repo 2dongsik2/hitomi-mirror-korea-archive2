@@ -1,0 +1,49 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python sub branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'application path'
+        required: true
+        default: 'silent.py'
+  schedule:
+  - cron: '0 * * * *'
+  #push:
+  #  branches: [ main ]
+  #pull_request:
+  #  branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: 'auto-commit'
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Merge files
+      run: |
+        ./merge.sh
+    - name: Run application
+      run: |
+        python ${{ github.event.inputs.logLevel || 'silent.py' }}
+    - name: Split files
+      run: |
+        ./split.sh
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: 'auto-commit'

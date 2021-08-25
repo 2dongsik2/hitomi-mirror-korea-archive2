@@ -1,0 +1,5 @@
+compression/
+venv/
+
+files.db
+data.db
