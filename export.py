@@ -1,4 +1,4 @@
-import requests, json, os, sqlite3
+import json, os, sqlite3
 
 db_filename = 'data.db'
 files_db_filename = 'files.db'
